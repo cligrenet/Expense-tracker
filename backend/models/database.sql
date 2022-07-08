@@ -1,0 +1,9 @@
+CREATE DATABASE pernexpense;
+
+CREATE TABLE transactions(
+    transaction_id SERIAL PRIMARY KEY NOT NULL,
+    text VARCHAR(300) NOT NULL,
+    amount NUMERIC NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
