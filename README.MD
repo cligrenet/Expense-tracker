@@ -10,8 +10,8 @@ Node.js, React.js
 
 ## Dependencies
 
--   colors, dotenv, express, morgan, pg, concurrently, nodemon
--   Frontend:
+-   colors, dotenv, express, morgan, [pg](https://www.npmjs.com/package/pg), concurrently, nodemon
+-   Frontend: axios, [framer-motion](https://www.npmjs.com/package/framer-motion), chart.js, [react-chartjs-2](https://www.npmjs.com/package/react-chartjs-2#docs)
 
 ## Installation
 
