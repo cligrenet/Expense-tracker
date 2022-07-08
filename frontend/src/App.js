@@ -1,7 +1,7 @@
 import Header from './components/Header';
 import Balance from './components/Balance';
 import IncomeExpenses from './components/IncomeExpenses';
-import Chart from './components/Chart';
+import ChartComp from './components/Chart';
 import TransactionList from './components/TransactionList';
 import AddTransaction from './components/AddTransaction';
 import { GlobalProvider } from './context/GlobalState';
@@ -15,7 +15,7 @@ function App() {
 			<div className="container">
 				<Balance />
 				<IncomeExpenses />
-				<Chart />
+				<ChartComp />
 				<TransactionList />
 				<AddTransaction />
 			</div>

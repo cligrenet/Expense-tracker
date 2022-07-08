@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { GlobalContext } from '../context/GlobalState';
 import { numberWithCommas } from '../utils/format';
+import { motion } from 'framer-motion';
 
 const Transaction = ({ transaction }) => {
 	const { deleteTransaction } = useContext(GlobalContext);
@@ -8,7 +9,13 @@ const Transaction = ({ transaction }) => {
 	const sign = transaction.amount > 0 ? '+' : '-';
 
 	return (
-		<li className={transaction.amount > 0 ? 'plus' : 'minus'}>
+		<motion.li
+			className={transaction.amount > 0 ? 'plus' : 'minus'}
+			transaction={transaction}
+			initial={{ opacity: 0 }}
+			animate={{ opacity: 1 }}
+			exit={{ opacity: 0 }}
+		>
 			{transaction.text}
 			<span>
 				{sign} €{numberWithCommas(Math.abs(transaction.amount))}
@@ -16,7 +23,7 @@ const Transaction = ({ transaction }) => {
 			<button className="delete-btn" onClick={() => deleteTransaction(transaction.transaction_id)}>
 				x
 			</button>
-		</li>
+		</motion.li>
 	);
 };
 
