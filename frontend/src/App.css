@@ -2,6 +2,17 @@
 
 :root {
 	--box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+	--bg-darkblue: #1c255b;
+	--bg-muted-darkblue: #252f6e;
+	--yellow: #ffb12a;
+	--red: #ff2e62;
+	--green: #01cb87;
+	--beige: #ffeac6;
+	--pink: #ffc1c2;
+	--purple: #6259ff;
+	--lightgrey: #f7f7f7;
+	--grey: #bbb;
+	--darkgrey: #333;
 }
 
 * {
@@ -9,7 +20,7 @@
 }
 
 body {
-	background-color: #f7f7f7;
+	background-color: var(--bg-darkblue);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -24,13 +35,30 @@ body {
 	width: 350px;
 }
 
+.align-center {
+	text-align: center;
+}
+
+.white-font {
+	color: var(--lightgrey);
+}
+
+.grey-font {
+	color: var(--darkgrey);
+}
+
 h1 {
 	letter-spacing: 1px;
+	text-align: center;
 	margin: 0;
 }
 
+h2 {
+	margin-bottom: 2.5em;
+}
+
 h3 {
-	border-bottom: 1px solid #bbb;
+	border-bottom: 1px solid var(--grey);
 	padding-bottom: 10px;
 	margin: 40px 0 10px;
 }
@@ -41,12 +69,13 @@ h4 {
 }
 
 .inc-exp-container {
-	background-color: #fff;
+	background-color: var(--lightgrey);
 	box-shadow: var(--box-shadow);
 	padding: 20px;
 	display: flex;
 	justify-content: space-between;
-	margin: 20px 0;
+	margin-top: 2em;
+	margin-bottom: 3em;
 }
 
 .inc-exp-container > div {
@@ -55,7 +84,7 @@ h4 {
 }
 
 .inc-exp-container > div:first-of-type {
-	border-right: 1px solid #dedede;
+	border-right: 1px solid var(--lightgrey);
 }
 
 .money {
@@ -65,11 +94,11 @@ h4 {
 }
 
 .money.plus {
-	color: #2ecc71;
+	color: var(--green);
 }
 
 .money.minus {
-	color: #c0392b;
+	color: var(--red);
 }
 
 label {
@@ -79,7 +108,7 @@ label {
 
 input[type='text'],
 input[type='number'] {
-	border: 1px solid #dedede;
+	border: 1px solid var(--lightgrey);
 	border-radius: 2px;
 	display: block;
 	font-size: 16px;
@@ -89,9 +118,9 @@ input[type='number'] {
 
 .btn {
 	cursor: pointer;
-	background-color: #9c88ff;
+	background-color: var(--purple);
 	box-shadow: var(--box-shadow);
-	color: #fff;
+	color: var(--lightgrey);
 	border: 0;
 	display: block;
 	font-size: 16px;
@@ -112,9 +141,9 @@ input[type='number'] {
 }
 
 .list li {
-	background-color: #fff;
+	background-color: var(--lightgrey);
 	box-shadow: var(--box-shadow);
-	color: #333;
+	color: var(--darkgrey);
 	display: flex;
 	justify-content: space-between;
 	position: relative;
@@ -123,18 +152,18 @@ input[type='number'] {
 }
 
 .list li.plus {
-	border-right: 5px solid #2ecc71;
+	border-right: 5px solid var(--green);
 }
 
 .list li.minus {
-	border-right: 5px solid #c0392b;
+	border-right: 5px solid var(--red);
 }
 
 .delete-btn {
 	cursor: pointer;
-	background-color: #e74c3c;
+	background-color: var(--yellow);
 	border: 0;
-	color: #fff;
+	color: var(--lightgrey);
 	font-size: 20px;
 	line-height: 20px;
 	padding: 2px 5px;
@@ -154,4 +183,14 @@ input[type='number'] {
 	.container {
 		width: 300px;
 	}
+}
+
+.li-flex-wrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.small-date {
+	font-size: 0.7em;
+	color: var(--darkgrey);
 }

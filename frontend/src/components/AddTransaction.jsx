@@ -21,10 +21,12 @@ const AddTransaction = () => {
 
 	return (
 		<>
-			<h3>Add new transaction</h3>
+			<h3 className="white-font">Add new transaction</h3>
 			<form onSubmit={handleAddTransaction}>
 				<div className="form-control">
-					<label htmlFor="text">Text</label>
+					<label className="white-font" htmlFor="text">
+						Text
+					</label>
 					<input
 						type="text"
 						value={text}
@@ -33,7 +35,9 @@ const AddTransaction = () => {
 					/>
 				</div>
 				<div className="form-control">
-					<label htmlFor="amount">Amount ( - : expense, + : income )</label>
+					<label className="white-font" htmlFor="amount">
+						Amount ( - : expense, + : income )
+					</label>
 					<input
 						type="number"
 						value={amount}

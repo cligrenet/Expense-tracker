@@ -9,8 +9,8 @@ const Balance = () => {
 
 	return (
 		<>
-			<h4>Balance</h4>
-			<h1>€{numberWithCommas(balance)}</h1>
+			<h3 className="white-font">Balance</h3>
+			<h1 className="white-font">€{numberWithCommas(balance)}</h1>
 		</>
 	);
 };

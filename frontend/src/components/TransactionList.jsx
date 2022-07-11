@@ -13,7 +13,7 @@ const TransactionList = () => {
 
 	return (
 		<>
-			<h3>History</h3>
+			<h3 className="white-font">History</h3>
 
 			<ul className="list">
 				<AnimatePresence>

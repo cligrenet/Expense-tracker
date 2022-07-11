@@ -16,7 +16,11 @@ const Transaction = ({ transaction }) => {
 			animate={{ opacity: 1 }}
 			exit={{ opacity: 0 }}
 		>
-			{transaction.text}
+			<span className="li-flex-wrapper">
+				{transaction.text}
+				<span className="small-date">{transaction.created_at.split('T')[0]}</span>
+			</span>
+
 			<span>
 				{sign} €{numberWithCommas(Math.abs(transaction.amount))}
 			</span>

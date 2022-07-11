@@ -17,8 +17,8 @@ const ChartComp = () => {
 		datasets: [
 			{
 				data: [income, expense],
-				backgroundColor: ['#2ecc71', '#c0392b'],
-				borderColor: 'white',
+				backgroundColor: ['#01cb87', '#ff2e62'],
+				borderColor: '#1c255b',
 				borderWith: 2,
 			},
 		],
