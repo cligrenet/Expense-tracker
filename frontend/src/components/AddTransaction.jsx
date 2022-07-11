@@ -49,7 +49,7 @@ const AddTransaction = () => {
 					/>
 				</div>
 				<div className="form-control">
-					<button className="btn-delete hover:bg-yellow">Add</button>
+					<button className="btn-delete ease-in-out duration-300 hover:bg-yellow">Add</button>
 				</div>
 			</form>
 		</>
