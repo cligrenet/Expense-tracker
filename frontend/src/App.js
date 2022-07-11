@@ -12,8 +12,8 @@ function App() {
 	return (
 		<GlobalProvider>
 			<Header />
-			<div className="container mx-auto px-5">
-				<div className="border rounded-lg px-8 py-4 mb-5">
+			<div className="container mx-auto px-5 max-w-md">
+				<div className="rounded-lg px-8 py-4 mb-5 bg-purple">
 					<Balance />
 					<IncomeExpenses />
 				</div>

@@ -13,7 +13,7 @@ const TransactionList = () => {
 
 	return (
 		<>
-			<h3 className="text-l text-slate-300 mb-3">Transactions</h3>
+			<h3 className="text-l text-purple mb-3">Transactions</h3>
 
 			<ul className="list">
 				<AnimatePresence>

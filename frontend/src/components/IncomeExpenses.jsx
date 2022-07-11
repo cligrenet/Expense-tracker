@@ -18,18 +18,19 @@ const IncomeExpenses = () => {
 	).toFixed(2);
 
 	return (
-		<div className="flex flex-nowrap justify-center text-slate-300 my-3">
+		<div className="flex flex-wrap justify-center text-slate-300 my-3">
 			<div className="mx-3 text-center">
-				<div className="flex items-center" style={{ color: '#252F6E' }}>
+				<div className="flex flex-wrap items-center text-darkblue-1">
 					<FaPlusCircle className="mr-1" /> Income
 				</div>
-				<p style={{ color: '#01cb87' }}>€ {numberWithCommas(incomeTotal)}</p>
+				<p className="text-green">€ {numberWithCommas(incomeTotal)}</p>
 			</div>
-			<div className="mx-3 text-center">
-				<div className="flex items-center" style={{ color: '#252F6E' }}>
+
+			<div className="mx-3 text-center pl-4 border-l-2 border-darkblue-1">
+				<div className="flex flex-wrap items-center text-darkblue-1">
 					<FaMinusCircle className="mr-1" /> Expense
 				</div>
-				<p style={{ color: '#ff2e62' }}>€ {numberWithCommas(expenseTotal)}</p>
+				<p className="text-red">€ {numberWithCommas(expenseTotal)}</p>
 			</div>
 		</div>
 	);

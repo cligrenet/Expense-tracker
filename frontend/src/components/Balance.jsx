@@ -9,10 +9,8 @@ const Balance = () => {
 
 	return (
 		<>
-			<h3 className="font-sans text-l text-center " style={{ color: '#252F6E' }}>
-				Total Balance
-			</h3>
-			<h1 className="text-3xl text-slate-300 text-center mb-5">€{numberWithCommas(balance)}</h1>
+			<h3 className="font-sans text-l text-center text-darkblue-1">Total Balance</h3>
+			<h1 className="text-3xl text-slate-200 text-center mb-5">€{numberWithCommas(balance)}</h1>
 		</>
 	);
 };

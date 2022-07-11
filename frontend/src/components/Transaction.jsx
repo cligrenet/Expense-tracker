@@ -8,32 +8,29 @@ const Transaction = ({ transaction }) => {
 	const { deleteTransaction } = useContext(GlobalContext);
 
 	const sign = transaction.amount > 0 ? '+' : '-';
-	const listItemStyle = 'flex justify-between items-center py-2 px-3 border rounded my-2';
-	const plus = '';
-	const minus = '';
-	// #ff2e62
-	// #01cb87
+	const listItem =
+		'flex flex-wrap justify-between items-center py-2 px-3 rounded-lg my-2 bg-muted-darkblue hover:bg-yellow text-slate-300 hover:text-darkblue-1 hover:border-yellow border-l-4 ';
+	const plus = 'border-l-4 border-green';
+	const minus = 'border-l-4 border-red';
 
 	return (
 		<motion.li
-			className={transaction.amount > 0 ? listItemStyle + plus : listItemStyle + minus}
+			className={transaction.amount > 0 ? listItem + plus : listItem + minus}
 			transaction={transaction}
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
 			exit={{ opacity: 0 }}
 		>
-			<span className="flex flex-col">
-				<span className="text-slate-400">{transaction.text}</span>
-				<span className="text-xs " style={{ color: '#262e69' }}>
-					{transaction.created_at.split('T')[0]}
-				</span>
+			<span className="flex flex-wrap flex-col">
+				<span>{transaction.text}</span>
+				<span className="text-xs">{transaction.created_at.split('T')[0]}</span>
 			</span>
 
 			<span>
-				<span className="text-slate-400">
+				<span>
 					{sign} €{numberWithCommas(Math.abs(transaction.amount))}
 				</span>
-				<button className="pl-3 text-slate-400" onClick={() => deleteTransaction(transaction.transaction_id)}>
+				<button className="pl-3 hover:text-red" onClick={() => deleteTransaction(transaction.transaction_id)}>
 					<FaRegTrashAlt />
 				</button>
 			</span>
