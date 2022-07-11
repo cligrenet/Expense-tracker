@@ -12,12 +12,23 @@ function App() {
 	return (
 		<GlobalProvider>
 			<Header />
-			<div className="container">
-				<Balance />
-				<IncomeExpenses />
-				<ChartComp />
-				<TransactionList />
-				<AddTransaction />
+			<div className="container mx-auto px-5">
+				<div className="border rounded-lg px-8 py-4 mb-5">
+					<Balance />
+					<IncomeExpenses />
+				</div>
+
+				<div className="px-20 mb-5">
+					<ChartComp />
+				</div>
+
+				<div className="mb-5">
+					<TransactionList />
+				</div>
+
+				<div>
+					<AddTransaction />
+				</div>
 			</div>
 		</GlobalProvider>
 	);

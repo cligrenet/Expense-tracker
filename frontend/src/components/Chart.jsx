@@ -18,10 +18,17 @@ const ChartComp = () => {
 			{
 				data: [income, expense],
 				backgroundColor: ['#01cb87', '#ff2e62'],
-				borderColor: '#1c255b',
-				borderWith: 2,
+				borderColor: '#010a42',
+				borderWidth: 4,
 			},
 		],
+		options: {
+			legend: {
+				labels: {
+					Color: '#262e69', //QUESTION
+				},
+			},
+		},
 	};
 
 	return (

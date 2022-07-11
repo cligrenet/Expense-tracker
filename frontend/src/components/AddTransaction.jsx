@@ -21,24 +21,27 @@ const AddTransaction = () => {
 
 	return (
 		<>
-			<h3 className="white-font">Add new transaction</h3>
+			<h3 className="text-l text-slate-300 mb-3">Add new transaction</h3>
 			<form onSubmit={handleAddTransaction}>
-				<div className="form-control">
-					<label className="white-font" htmlFor="text">
+				<div className="flex flex-col mb-2">
+					<label className="pr-3" style={{ color: '#262e69' }} htmlFor="text">
 						Text
 					</label>
 					<input
+						className="form-input rounded"
 						type="text"
 						value={text}
 						onChange={(e) => setText(e.target.value)}
 						placeholder="Enter text..."
 					/>
 				</div>
-				<div className="form-control">
-					<label className="white-font" htmlFor="amount">
+
+				<div className="flex flex-col mb-2">
+					<label className="pr-3" style={{ color: '#262e69' }} htmlFor="amount">
 						Amount ( - : expense, + : income )
 					</label>
 					<input
+						className="form-input rounded"
 						type="number"
 						value={amount}
 						onChange={(e) => setAmount(e.target.value)}
@@ -46,7 +49,7 @@ const AddTransaction = () => {
 					/>
 				</div>
 				<div className="form-control">
-					<button className="btn">Add</button>
+					<button className="btn-delete">Add</button>
 				</div>
 			</form>
 		</>
