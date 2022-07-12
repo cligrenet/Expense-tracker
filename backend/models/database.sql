@@ -10,7 +10,7 @@ CREATE TABLE users(
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TYPE category AS ENUM ('Bills', 'Business', 'Car', 'Entertainment', 'Food', 'Gifts', 'House', 'Investments', 'Kid','Lottery', 'Medical', 'Other', 'Pet', 'Phone/Internet', 'Rental', 'Salary', 'Saving', 'Shopping', 'Transport', 'Travel');
+CREATE TYPE category AS ENUM ('Bills', 'Business', 'Bank Fees', 'Car', 'Education/Training', 'Entertainment', 'Food/Grocery', 'Gifts', 'House', 'Investments', 'Interest', 'Insurance', 'Kid', 'Legal Fees', 'Medical', 'Online Services', 'Other', 'Pet', 'Phone/Internet', 'Post/Shipping', 'Rental', 'Repairs/Maintenance', 'Restaurant', 'Salary', 'Saving', 'Software', 'Shopping', 'Subscriptions/Memberships', 'Taxes', 'Transport', 'Travel');
 
 CREATE TABLE transactions(
     transaction_id SERIAL PRIMARY KEY NOT NULL,
