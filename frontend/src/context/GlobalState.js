@@ -9,10 +9,16 @@ import axios from 'axios';
 //   { id: 3, text: 'Book', amount: -10 },
 //   { id: 4, text: 'Camera', amount: 150 }
 // ];
+
+// Get user from localStorage
+const user = JSON.parse(localStorage.getItem('user'));
+
 const initialState = {
+	user: user ? user : null,
 	transactions: [],
 	error: null,
 	loading: true,
+	isSuccess: false,
 };
 
 // Create context
@@ -23,10 +29,42 @@ export const GlobalProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(AppReducer, initialState);
 
 	// Actions => make calls to the reducer
-	async function getTransactions() {
+	// Register user
+	async function register(userData) {
+		const response = await axios.post('/api/v1/users', userData);
+
+		if (response.data) {
+			localStorage.setItem('user', JSON.stringify(response.data));
+		}
+		return response.data;
+	}
+
+	// Login user
+	async function login(userData) {
+		const response = await axios.post('/api/v1/users/login', userData);
+
+		if (response.data) {
+			localStorage.setItem('user', JSON.stringify(response.data));
+		}
+		return response.data;
+	}
+
+	// Logout user
+	function logout() {
+		localStorage.removeItem('user');
+	}
+
+	// Fetch transactions
+	async function getTransactions(token) {
+		const config = {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
+
 		try {
-			const res = await axios.get('/api/v1/transactions');
-			// console.log(res.data.data);
+			const res = await axios.get('/api/v1/transactions', config);
+			console.log('GlobalState fetch transactions', res.data.data);
 
 			dispatch({
 				type: 'GET_TRANSACTIONS',
@@ -41,9 +79,16 @@ export const GlobalProvider = ({ children }) => {
 		}
 	}
 
-	async function deleteTransaction(id) {
+	// Delete transaction
+	async function deleteTransaction(id, token) {
+		const config = {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
+
 		try {
-			await axios.delete(`/api/v1/transactions/${id}`);
+			await axios.delete(`/api/v1/transactions/${id}`, config);
 			dispatch({ type: 'DELETE_TRANSACTION', payload: id });
 		} catch (err) {
 			console.log(err);
@@ -54,16 +99,19 @@ export const GlobalProvider = ({ children }) => {
 		}
 	}
 
-	async function addTransaction(transaction) {
+	// Create transaction
+	async function addTransaction(transaction, token) {
 		const config = {
 			headers: {
+				Authorization: `Bearer ${token}`,
 				'Content-Type': 'application/json',
 			},
 		};
 
 		try {
 			const res = await axios.post('/api/v1/transactions', transaction, config);
-			// console.log(res.data);
+			console.log('GlobalState create transaction', res.data);
+
 			dispatch({
 				type: 'ADD_TRANSACTION',
 				payload: res.data.data[0],
@@ -83,9 +131,14 @@ export const GlobalProvider = ({ children }) => {
 				transactions: state.transactions,
 				error: state.error,
 				loading: state.loading,
+				user: state.user,
+				isSuccess: state.isSuccess,
 				getTransactions,
 				deleteTransaction,
 				addTransaction,
+				register,
+				login,
+				logout,
 			}}
 		>
 			{children}

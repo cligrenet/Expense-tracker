@@ -2,14 +2,21 @@ import { useContext, useEffect } from 'react';
 import { GlobalContext } from '../context/GlobalState';
 import Transaction from './Transaction';
 import { AnimatePresence } from 'framer-motion';
+import Spinner from '../components/Spinner';
 
 const TransactionList = () => {
-	const { transactions, getTransactions } = useContext(GlobalContext);
+	const { transactions, getTransactions, user, loading } = useContext(GlobalContext);
+
+	console.log('user from TransactionList ', user);
 
 	useEffect(() => {
-		getTransactions();
+		getTransactions(user.token);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	if (loading) {
+		return <Spinner />;
+	}
 
 	return (
 		<>

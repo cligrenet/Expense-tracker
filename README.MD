@@ -10,8 +10,8 @@ Node.js, React.js
 
 ## Dependencies
 
--   colors, dotenv, express, morgan, [pg](https://www.npmjs.com/package/pg), concurrently, nodemon
--   Frontend: axios, react-icons, [tailwindcss](https://tailwindcss.com/), [framer-motion](https://www.npmjs.com/package/framer-motion), chart.js, [react-chartjs-2](https://www.npmjs.com/package/react-chartjs-2#docs)
+-   bcryptjs, express-async-handler, jsonwebtoken, colors, dotenv, express, morgan, [pg](https://www.npmjs.com/package/pg), concurrently, nodemon
+-   Frontend: React Router V6, axios, react-icons, [tailwindcss](https://tailwindcss.com/), [framer-motion](https://www.npmjs.com/package/framer-motion), chart.js, [react-chartjs-2](https://www.npmjs.com/package/react-chartjs-2#docs), react-toastify
 
 ## Installation
 
