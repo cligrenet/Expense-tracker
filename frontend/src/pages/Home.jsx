@@ -7,8 +7,7 @@ import Balance from '../components/Balance';
 import IncomeExpenses from '../components/IncomeExpenses';
 import ChartComp from '../components/Chart';
 import TransactionList from '../components/TransactionList';
-// import AddTransaction from './components/AddTransaction';
-import FloatingActionBtn from '../components/FloatingActionBtn';
+import AddTransaction from '../components/AddTransaction';
 
 function Home() {
 	const {
@@ -66,7 +65,7 @@ function Home() {
 				</div>
 
 				<div>
-					<FloatingActionBtn />
+					<AddTransaction />
 				</div>
 			</section>
 		</div>
