@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { FaRegTrashAlt } from 'react-icons/fa';
 
 const Transaction = ({ transaction }) => {
-	const { deleteTransaction } = useContext(GlobalContext);
+	const { user, deleteTransaction } = useContext(GlobalContext);
 
 	const sign = transaction.amount > 0 ? '+' : '-';
 	const listItem =
@@ -30,7 +30,10 @@ const Transaction = ({ transaction }) => {
 				<span>
 					{sign} €{numberWithCommas(Math.abs(transaction.amount))}
 				</span>
-				<button className="pl-3 hover:text-red" onClick={() => deleteTransaction(transaction.transaction_id)}>
+				<button
+					className="pl-3 hover:text-red"
+					onClick={() => deleteTransaction(transaction.transaction_id, user.token)}
+				>
 					<FaRegTrashAlt />
 				</button>
 			</span>

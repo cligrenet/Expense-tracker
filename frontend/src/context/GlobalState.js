@@ -100,7 +100,7 @@ export const GlobalProvider = ({ children }) => {
 			};
 
 			const res = await axios.get('/api/v1/transactions', config);
-			console.log('GlobalState fetch transactions', res.data.data);
+			// console.log('GlobalState fetch transactions', res.data.data);
 
 			dispatch({
 				type: 'GET_TRANSACTIONS',

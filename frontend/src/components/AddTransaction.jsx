@@ -28,7 +28,7 @@ const AddTransaction = () => {
 	const [amount, setAmount] = useState(0);
 	const [category, setCategory] = useState('');
 
-	const { addTransaction } = useContext(GlobalContext);
+	const { user, addTransaction } = useContext(GlobalContext);
 
 	const handleAddTransaction = (e) => {
 		e.preventDefault();
@@ -39,7 +39,7 @@ const AddTransaction = () => {
 			category: category,
 		};
 
-		addTransaction(newTransaction);
+		addTransaction(newTransaction, user.token);
 		setModalIsOpen(false);
 	};
 
