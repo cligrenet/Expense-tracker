@@ -2,23 +2,22 @@ import { createContext, useReducer } from 'react';
 import AppReducer from './AppReducer';
 import axios from 'axios';
 
-// Initial state
-// const dummyTransactions = [
-//   { id: 1, text: 'Flower', amount: -20 },
-//   { id: 2, text: 'Salary', amount: 300 },
-//   { id: 3, text: 'Book', amount: -10 },
-//   { id: 4, text: 'Camera', amount: 150 }
-// ];
-
 // Get user from localStorage
 const user = JSON.parse(localStorage.getItem('user'));
 
+// Initial state
 const initialState = {
 	user: user ? user : null,
+	isAuthError: false,
+	isAuthSuccess: false,
+	isAuthLoading: false,
+	authMessage: '',
+
 	transactions: [],
-	error: null,
-	loading: true,
-	isSuccess: false,
+	transactionsError: null,
+	isTransactionsError: false,
+	isTransactionsSuccess: false,
+	isTransactionsLoading: true,
 };
 
 // Create context
@@ -28,30 +27,67 @@ export const GlobalContext = createContext(initialState);
 export const GlobalProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(AppReducer, initialState);
 
-	// Actions => make calls to the reducer
+	// NOTE Actions => make calls to the reducer, make changes to initial state
+
 	// Register user
 	async function register(userData) {
-		const response = await axios.post('/api/v1/users', userData);
+		dispatch({
+			type: 'REGISTER_LOADING',
+		});
 
-		if (response.data) {
-			localStorage.setItem('user', JSON.stringify(response.data));
+		try {
+			const response = await axios.post('/api/v1/users', userData);
+
+			if (response.data) {
+				localStorage.setItem('user', JSON.stringify(response.data));
+			}
+			// return response.data;
+			dispatch({
+				type: 'REGISTER_SUCCESS',
+				payload: response.data,
+			});
+		} catch (err) {
+			console.log(err);
+			dispatch({
+				type: 'REGISTER_FAILED',
+				payload: err.response.data.message,
+			});
 		}
-		return response.data;
 	}
 
 	// Login user
 	async function login(userData) {
-		const response = await axios.post('/api/v1/users/login', userData);
+		dispatch({
+			type: 'LOGIN_LOADING',
+		});
 
-		if (response.data) {
-			localStorage.setItem('user', JSON.stringify(response.data));
+		try {
+			const response = await axios.post('/api/v1/users/login', userData);
+
+			if (response.data) {
+				localStorage.setItem('user', JSON.stringify(response.data));
+			}
+			// return response.data;
+			dispatch({
+				type: 'LOGIN_SUCCESS',
+				payload: response.data,
+			});
+		} catch (err) {
+			console.log(err);
+			dispatch({
+				type: 'LOGIN_FAILED',
+				payload: err.response.data.message,
+			});
 		}
-		return response.data;
 	}
 
 	// Logout user
 	function logout() {
 		localStorage.removeItem('user');
+
+		dispatch({
+			type: 'LOGOUT_SUCCESS',
+		});
 	}
 
 	// Fetch transactions
@@ -74,7 +110,7 @@ export const GlobalProvider = ({ children }) => {
 			console.log(err);
 			dispatch({
 				type: 'TRANSACTION_ERROR',
-				payload: err.response.data.error,
+				payload: err.response.data.transactionsError,
 			});
 		}
 	}
@@ -94,7 +130,7 @@ export const GlobalProvider = ({ children }) => {
 			console.log(err);
 			dispatch({
 				type: 'TRANSACTION_ERROR',
-				payload: err.response.data.error,
+				payload: err.response.data.transactionsError,
 			});
 		}
 	}
@@ -120,7 +156,7 @@ export const GlobalProvider = ({ children }) => {
 			console.log(err);
 			dispatch({
 				type: 'TRANSACTION_ERROR',
-				payload: err.response.data.error,
+				payload: err.response.data.transactionsError,
 			});
 		}
 	}
@@ -128,17 +164,22 @@ export const GlobalProvider = ({ children }) => {
 	return (
 		<GlobalContext.Provider
 			value={{
-				transactions: state.transactions,
-				error: state.error,
-				loading: state.loading,
 				user: state.user,
-				isSuccess: state.isSuccess,
-				getTransactions,
-				deleteTransaction,
-				addTransaction,
+				isAuthError: state.isAuthError,
+				isAuthSuccess: state.isAuthSuccess,
+				isAuthLoading: state.isAuthLoading,
+				authMessage: state.authMessage,
+				transactions: state.transactions,
+				transactionsError: state.transactionsError,
+				isTransactionsError: state.isTransactionsError,
+				isTransactionsLoading: state.isTransactionsLoading,
+				isTransactionsSuccess: state.isTransactionsSuccess,
 				register,
 				login,
 				logout,
+				getTransactions,
+				deleteTransaction,
+				addTransaction,
 			}}
 		>
 			{children}

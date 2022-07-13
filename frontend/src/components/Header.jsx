@@ -1,5 +1,10 @@
+import { useContext } from 'react';
+import { GlobalContext } from '../context/GlobalState';
+
 const Header = () => {
-	return <h2 className="font-sans text-2xl text-center my-5 text-purple">Expense Tracker</h2>;
+	const { user } = useContext(GlobalContext);
+
+	return <h2 className="font-sans text-2xl my-5 text-purple">Hello {user.name} !</h2>;
 };
 
 export default Header;

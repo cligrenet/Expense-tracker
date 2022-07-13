@@ -5,7 +5,24 @@ import { AnimatePresence } from 'framer-motion';
 import Spinner from '../components/Spinner';
 
 const TransactionList = () => {
-	const { transactions, getTransactions, user, loading } = useContext(GlobalContext);
+	const {
+		user,
+		isAuthError,
+		isAuthSuccess,
+		isAuthLoading,
+		authMessage,
+		transactions,
+		transactionsError,
+		isTransactionsError,
+		isTransactionsLoading,
+		isTransactionsSuccess,
+		register,
+		login,
+		logout,
+		getTransactions,
+		deleteTransaction,
+		addTransaction,
+	} = useContext(GlobalContext);
 
 	console.log('user from TransactionList ', user);
 
@@ -14,9 +31,9 @@ const TransactionList = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	if (loading) {
-		return <Spinner />;
-	}
+	// if (isTransactionsLoading) {
+	// 	return <Spinner />;
+	// }
 
 	return (
 		<>

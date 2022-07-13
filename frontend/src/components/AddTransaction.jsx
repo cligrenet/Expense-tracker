@@ -48,7 +48,7 @@ const AddTransaction = () => {
 						placeholder="Enter amount..."
 					/>
 				</div>
-				<div className="form-control">
+				<div>
 					<button className="btn-delete ease-in-out duration-300 hover:bg-yellow">Add</button>
 				</div>
 			</form>

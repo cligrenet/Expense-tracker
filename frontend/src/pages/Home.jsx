@@ -11,25 +11,47 @@ import TransactionList from '../components/TransactionList';
 import FloatingActionBtn from '../components/FloatingActionBtn';
 
 function Home() {
-	const { user, logout } = useContext(GlobalContext);
+	const {
+		user,
+		isAuthError,
+		isAuthSuccess,
+		isAuthLoading,
+		authMessage,
+		transactions,
+		transactionsError,
+		isTransactionsError,
+		isTransactionsLoading,
+		isTransactionsSuccess,
+		register,
+		login,
+		logout,
+		getTransactions,
+		deleteTransaction,
+		addTransaction,
+	} = useContext(GlobalContext);
 
 	const navigate = useNavigate();
 
 	const onLogout = () => {
 		logout();
+
 		navigate('/login');
 	};
 
 	return (
-		<>
-			<Header />
-			{user && (
-				<button className="btn" onClick={onLogout}>
-					<FaSignOutAlt /> Logout
-				</button>
-			)}
+		<div className="container mx-auto px-5 max-w-md">
+			<section className="flex flex-wrap justify-between">
+				<Header />
 
-			<div className="container mx-auto px-5 max-w-md">
+				<button
+					className="flex flex-nowrap col items-center text-slate-300  hover:text-yellow"
+					onClick={onLogout}
+				>
+					<FaSignOutAlt className="mr-2" /> Logout
+				</button>
+			</section>
+
+			<section>
 				<div className="rounded-lg px-8 py-4 mb-5 bg-purple">
 					<Balance />
 					<IncomeExpenses />
@@ -46,8 +68,8 @@ function Home() {
 				<div>
 					<FloatingActionBtn />
 				</div>
-			</div>
-		</>
+			</section>
+		</div>
 	);
 }
 
