@@ -3,7 +3,6 @@ import { GlobalContext } from '../context/GlobalState';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { FaSignInAlt } from 'react-icons/fa';
-import Spinner from '../components/Spinner';
 
 function Register() {
 	const [formData, setFormData] = useState({
@@ -17,7 +16,7 @@ function Register() {
 
 	const navigate = useNavigate();
 
-	const { user, isAuthError, isAuthSuccess, isAuthLoading, authMessage, register } = useContext(GlobalContext);
+	const { user, isAuthError, isAuthSuccess, authMessage, register } = useContext(GlobalContext);
 
 	useEffect(() => {
 		if (isAuthError) {
@@ -50,10 +49,6 @@ function Register() {
 			register(userData);
 		}
 	};
-
-	// if (isAuthLoading) {
-	// 	return <Spinner />;
-	// }
 
 	return (
 		<div className="container mx-auto px-5 max-w-md pt-5">

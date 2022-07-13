@@ -1,7 +1,8 @@
-import { useState, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { GlobalContext } from '../context/GlobalState';
 import { MdAdd } from 'react-icons/md';
 import Modal from 'react-modal';
+import { toast } from 'react-toastify';
 
 // React Modal
 const customStyles = {
@@ -28,7 +29,13 @@ const AddTransaction = () => {
 	const [amount, setAmount] = useState(0);
 	const [category, setCategory] = useState('');
 
-	const { user, addTransaction } = useContext(GlobalContext);
+	const { user, addTransaction, isTransactionsError, transactionsError } = useContext(GlobalContext);
+
+	useEffect(() => {
+		if (isTransactionsError) {
+			toast.error(transactionsError);
+		}
+	}, [isTransactionsError, transactionsError]);
 
 	const handleAddTransaction = (e) => {
 		e.preventDefault();
@@ -41,6 +48,11 @@ const AddTransaction = () => {
 
 		addTransaction(newTransaction, user.token);
 		setModalIsOpen(false);
+
+		// Reset Form
+		setText('');
+		setAmount(0);
+		setCategory('');
 	};
 
 	// Open/close modal

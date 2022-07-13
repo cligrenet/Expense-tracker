@@ -1,17 +1,24 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { GlobalContext } from '../context/GlobalState';
 import { numberWithCommas } from '../utils/format';
 import { motion } from 'framer-motion';
 import { FaRegTrashAlt } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 const Transaction = ({ transaction }) => {
-	const { user, deleteTransaction } = useContext(GlobalContext);
+	const { user, deleteTransaction, isTransactionsError, transactionsError } = useContext(GlobalContext);
 
 	const sign = transaction.amount > 0 ? '+' : '-';
 	const listItem =
 		'flex flex-wrap justify-between items-center py-2 px-3 rounded-lg my-2 bg-muted-darkblue hover:bg-yellow text-slate-300 hover:text-darkblue-1 hover:border-yellow border-l-4 ';
 	const plus = 'border-l-4 border-green';
 	const minus = 'border-l-4 border-red';
+
+	useEffect(() => {
+		if (isTransactionsError) {
+			toast.error(transactionsError);
+		}
+	}, [isTransactionsError, transactionsError]);
 
 	return (
 		<motion.li

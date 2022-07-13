@@ -49,21 +49,28 @@ export default (state, action) => {
 			return {
 				...state,
 				isTransactionsLoading: false,
+				isTransactionsSuccess: true,
 				transactions: action.payload,
 			};
 		case 'DELETE_TRANSACTION':
 			return {
 				...state,
+				isTransactionsLoading: false,
+				isTransactionsSuccess: true,
 				transactions: state.transactions.filter((transaction) => transaction.transaction_id !== action.payload),
 			};
 		case 'ADD_TRANSACTION':
 			return {
 				...state,
+				isTransactionsLoading: false,
+				isTransactionsSuccess: true,
 				transactions: [...state.transactions, action.payload],
 			};
 		case 'TRANSACTION_ERROR':
 			return {
 				...state,
+				isTransactionsLoading: false,
+				isTransactionsError: true,
 				transactionsError: action.payload,
 			};
 		default:

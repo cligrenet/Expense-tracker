@@ -146,7 +146,7 @@ export const GlobalProvider = ({ children }) => {
 			};
 
 			const res = await axios.post('/api/v1/transactions', transaction, config);
-			console.log('GlobalState create transaction', res.data);
+			// console.log('GlobalState create transaction', res.data);
 
 			dispatch({
 				type: 'ADD_TRANSACTION',
