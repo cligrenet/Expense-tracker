@@ -50,7 +50,7 @@ function Home() {
 				</button>
 			</section>
 
-			<section>
+			<section className="relative">
 				<div className="rounded-lg px-8 py-4 mb-5 bg-purple">
 					<Balance />
 					<IncomeExpenses />
@@ -64,7 +64,7 @@ function Home() {
 					<TransactionList />
 				</div>
 
-				<div>
+				<div className="fixed bottom-6 right-10">
 					<AddTransaction />
 				</div>
 			</section>

@@ -54,10 +54,12 @@ const AddTransaction = () => {
 
 	return (
 		<div>
-			<MdAdd
-				className="rounded-full w-10 h-10 text-white bg-purple hover:bg-yellow cursor-pointer sticky float-right"
-				onClick={openModal}
-			/>
+			<div>
+				<MdAdd
+					className="rounded-full w-10 h-10 text-white bg-purple hover:bg-yellow cursor-pointer"
+					onClick={openModal}
+				/>
+			</div>
 
 			<Modal
 				isOpen={modalIsOpen}
