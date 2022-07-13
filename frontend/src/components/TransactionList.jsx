@@ -24,7 +24,7 @@ const TransactionList = () => {
 		addTransaction,
 	} = useContext(GlobalContext);
 
-	console.log('user from TransactionList ', user);
+	// console.log('user from TransactionList ', user);
 
 	useEffect(() => {
 		getTransactions(user.token);

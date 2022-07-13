@@ -26,6 +26,7 @@ const AddTransaction = () => {
 
 	const [text, setText] = useState('');
 	const [amount, setAmount] = useState(0);
+	const [category, setCategory] = useState('');
 
 	const { addTransaction } = useContext(GlobalContext);
 
@@ -33,9 +34,9 @@ const AddTransaction = () => {
 		e.preventDefault();
 
 		const newTransaction = {
-			id: Math.floor(Math.random() * 100000000),
 			text: text,
 			amount: +amount,
+			category: category,
 		};
 
 		addTransaction(newTransaction);
@@ -97,8 +98,67 @@ const AddTransaction = () => {
 							type="number"
 							value={amount}
 							onChange={(e) => setAmount(e.target.value)}
-							placeholder="Enter amount..."
+							placeholder="Enter Amount..."
 						/>
+					</div>
+
+					<div className="flex flex-col mb-2">
+						<label className="pr-3 text-slate-400" htmlFor="category">
+							Category
+						</label>
+						<select
+							className="form-input rounded-lg bg-slate-300 focus:bg-slate-100"
+							name="category"
+							id="category"
+							value={category}
+							onChange={(e) => setCategory(e.target.value)}
+						>
+							<option value="">--Please choose an option--</option>
+							<option value="Bills">Bills</option>
+							<option value="Business">Business</option>
+							<option value="Bank Fees">Bank Fees</option>
+							<option value="Car">Car</option>
+							<option value="Education/Training">Education/Training</option>
+							<option value="Entertainment">Entertainment</option>
+							<option value="Food/Grocery">Food/Grocery</option>
+							<option value="Gifts">Gifts</option>
+							<option value="House">House</option>
+							<option value="Investments">Investments</option>
+							<option value="Interest">Interest</option>
+							<option value="Insurance">Insurance</option>
+							<option value="Kid">Kid</option>
+							<option value="Legal Fees">Legal Fees</option>
+							<option value="Medical">Medical</option>
+							<option value="Online Services">Online Services</option>
+							<option value="Other">Other</option>
+							<option value="Pet">Pet</option>
+							<option value="Phone/Internet">Phone/Internet</option>
+							<option value="Post/Shipping">Post/Shipping</option>
+							<option value="Rental">Rental</option>
+							<option value="Repairs/Maintenance">Repairs/Maintenance</option>
+							<option value="Restaurant">Restaurant</option>
+							<option value="Salary">Salary</option>
+							<option value="Saving">Saving</option>
+							<option value="Software">Software</option>
+							<option value="Shopping">Shopping</option>
+							<option value="Subscriptions/Memberships">Subscriptions/Memberships</option>
+							<option value="Taxes">Taxes</option>
+							<option value="Transport">Transport</option>
+							<option value="Travel">Travel</option>
+							<option value=""></option>
+							<option value=""></option>
+							<option value=""></option>
+							<option value=""></option>
+							<option value=""></option>
+							<option value=""></option>
+							<option value=""></option>
+							<option value=""></option>
+							<option value=""></option>
+							<option value=""></option>
+							<option value=""></option>
+							<option value=""></option>
+							<option value=""></option>
+						</select>
 					</div>
 					<div className="form-control">
 						<button className="btn-delete ease-in-out duration-300 hover:bg-yellow">Add</button>

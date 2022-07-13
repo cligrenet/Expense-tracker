@@ -92,13 +92,13 @@ export const GlobalProvider = ({ children }) => {
 
 	// Fetch transactions
 	async function getTransactions(token) {
-		const config = {
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		};
-
 		try {
+			const config = {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			};
+
 			const res = await axios.get('/api/v1/transactions', config);
 			console.log('GlobalState fetch transactions', res.data.data);
 
@@ -110,41 +110,41 @@ export const GlobalProvider = ({ children }) => {
 			console.log(err);
 			dispatch({
 				type: 'TRANSACTION_ERROR',
-				payload: err.response.data.transactionsError,
+				payload: err.response.data.message,
 			});
 		}
 	}
 
 	// Delete transaction
-	async function deleteTransaction(id, token) {
-		const config = {
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		};
-
+	async function deleteTransaction(transaction_id, token) {
 		try {
-			await axios.delete(`/api/v1/transactions/${id}`, config);
-			dispatch({ type: 'DELETE_TRANSACTION', payload: id });
+			const config = {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			};
+
+			await axios.delete(`/api/v1/transactions/${transaction_id}`, config);
+			dispatch({ type: 'DELETE_TRANSACTION', payload: transaction_id });
 		} catch (err) {
 			console.log(err);
 			dispatch({
 				type: 'TRANSACTION_ERROR',
-				payload: err.response.data.transactionsError,
+				payload: err.response.data.message,
 			});
 		}
 	}
 
 	// Create transaction
 	async function addTransaction(transaction, token) {
-		const config = {
-			headers: {
-				Authorization: `Bearer ${token}`,
-				'Content-Type': 'application/json',
-			},
-		};
-
 		try {
+			const config = {
+				headers: {
+					Authorization: `Bearer ${token}`,
+					'Content-Type': 'application/json',
+				},
+			};
+
 			const res = await axios.post('/api/v1/transactions', transaction, config);
 			console.log('GlobalState create transaction', res.data);
 
@@ -156,7 +156,7 @@ export const GlobalProvider = ({ children }) => {
 			console.log(err);
 			dispatch({
 				type: 'TRANSACTION_ERROR',
-				payload: err.response.data.transactionsError,
+				payload: err.response.data.message,
 			});
 		}
 	}
