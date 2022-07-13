@@ -6,16 +6,21 @@ import { FaPlusCircle, FaMinusCircle } from 'react-icons/fa';
 const IncomeExpenses = () => {
 	const { transactions } = useContext(GlobalContext);
 
-	const amounts = transactions.map((transaction) => transaction.amount);
+	const incomeTotal = transactions
+		? transactions
+				.map((transaction) => transaction.amount)
+				.filter((amount) => +amount > 0)
+				.reduce((acc, amount) => (acc += +amount), 0)
+				.toFixed(2)
+		: 0;
 
-	const incomeTotal = amounts
-		.filter((amount) => +amount > 0)
-		.reduce((acc, amount) => (acc += +amount), 0)
-		.toFixed(2);
-
-	const expenseTotal = (
-		amounts.filter((amount) => +amount < 0).reduce((acc, amount) => (acc += +amount), 0) * -1
-	).toFixed(2);
+	const expenseTotal = transactions
+		? transactions
+				.map((transaction) => transaction.amount)
+				.filter((amount) => +amount < 0)
+				.reduce((acc, amount) => (acc += +amount), 0)
+				.toFixed(2)
+		: 0;
 
 	return (
 		<div className="flex flex-wrap justify-center text-slate-300 my-3">

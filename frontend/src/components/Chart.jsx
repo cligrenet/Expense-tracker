@@ -8,9 +8,20 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const ChartComp = () => {
 	const { transactions } = useContext(GlobalContext);
 
-	const amounts = transactions.map((transaction) => +transaction.amount);
-	const income = amounts.filter((amount) => amount > 0).reduce((acc, amount) => (acc += amount), 0);
-	const expense = Math.abs(amounts.filter((amount) => amount < 0).reduce((acc, amount) => (acc += amount), 0));
+	const income = transactions
+		? transactions
+				.map((transaction) => +transaction.amount)
+				.filter((amount) => amount > 0)
+				.reduce((acc, amount) => (acc += amount), 0)
+		: 0;
+	const expense = transactions
+		? Math.abs(
+				transactions
+					.map((transaction) => +transaction.amount)
+					.filter((amount) => amount < 0)
+					.reduce((acc, amount) => (acc += amount), 0),
+		  )
+		: 0;
 
 	const chartData = {
 		labels: ['Income', 'Expense'],

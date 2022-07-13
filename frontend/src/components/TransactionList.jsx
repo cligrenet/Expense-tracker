@@ -38,14 +38,16 @@ const TransactionList = () => {
 	return (
 		<>
 			<h3 className="text-l text-purple mb-3">Transactions</h3>
-
-			<ul className="list">
-				<AnimatePresence>
-					{transactions.map((transaction) => (
-						<Transaction key={transaction.transaction_id} transaction={transaction} />
-					))}
-				</AnimatePresence>
-			</ul>
+			{(!transactions || !transactions.length) && <p className="text-slate-300">Please add a transaction</p>}
+			{transactions && (
+				<ul className="list">
+					<AnimatePresence>
+						{transactions.map((transaction) => (
+							<Transaction key={transaction.transaction_id} transaction={transaction} />
+						))}
+					</AnimatePresence>
+				</ul>
+			)}
 		</>
 	);
 };
