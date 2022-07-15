@@ -64,7 +64,7 @@ export default (state, action) => {
 				...state,
 				isTransactionsLoading: false,
 				isTransactionsSuccess: true,
-				transactions: [...state.transactions, action.payload],
+				transactions: [action.payload, ...state.transactions],
 			};
 		case 'TRANSACTION_ERROR':
 			return {

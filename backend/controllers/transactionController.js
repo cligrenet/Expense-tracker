@@ -19,7 +19,9 @@ exports.getTransactions = async (req, res, next) => {
 			throw new Error('User not found');
 		}
 
-		const transactions = await pool.query(`SELECT * FROM transactions WHERE user_id='${wantedUserId}'`);
+		const transactions = await pool.query(
+			`SELECT * FROM transactions WHERE user_id='${wantedUserId}' ORDER BY created_at DESC`,
+		);
 
 		return res.status(200).json({
 			success: true,
