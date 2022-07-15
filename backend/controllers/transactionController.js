@@ -19,8 +19,16 @@ exports.getTransactions = async (req, res, next) => {
 			throw new Error('User not found');
 		}
 
+		// 1, Add sorting logic when query DB
+		// 2, Add filtering logic when query DB
+		// SELECT * FROM transactions WHERE user_id=3 AND category IN ('Cars', 'Business') ORDER BY created_at ASC
+		let filters = '';
+		if (req.query.filters && req.query.filters.length > 0) {
+			filters = `AND category IN (${req.query.filters.map((c) => `'${c}'`).join(',')})`;
+		}
+
 		const transactions = await pool.query(
-			`SELECT * FROM transactions WHERE user_id='${wantedUserId}' ORDER BY created_at ${
+			`SELECT * FROM transactions WHERE user_id='${wantedUserId}' ${filters} ORDER BY created_at ${
 				req.query.sort_direction === 'desc' ? 'DESC' : 'ASC'
 			}`,
 		);
