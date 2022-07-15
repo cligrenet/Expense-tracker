@@ -1,10 +1,11 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { GlobalContext } from '../context/GlobalState';
 import Transaction from './Transaction';
 import { AnimatePresence } from 'framer-motion';
 import Spinner from '../components/Spinner';
 import { toast } from 'react-toastify';
 import { FaSort, FaFilter, FaListUl } from 'react-icons/fa';
+import FiltersModal from './FiltersModal';
 
 const TransactionList = () => {
 	// States from context
@@ -15,20 +16,34 @@ const TransactionList = () => {
 		isTransactionsError,
 		isTransactionsLoading,
 		getTransactions,
+		transactionsSortingDirection,
 		toggleTransactionSortDirection,
+		transactionsSelectedCategories,
 	} = useContext(GlobalContext);
 
 	// console.log('from TransactionList ', transactions, transactionsReverted, user);
+
+	// Modal state
+	const [modalIsOpen, setModalIsOpen] = useState(false);
+
+	// Open/close modal
+	const openModal = () => {
+		setModalIsOpen(true);
+	};
+
+	const closeModal = () => {
+		setModalIsOpen(false);
+	};
+
+	useEffect(() => {
+		getTransactions(user.token);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [transactionsSelectedCategories, transactionsSortingDirection]); // Whenever selected categories change or sorting direction change, update transaction list
 
 	useEffect(() => {
 		if (isTransactionsError) {
 			toast.error(transactionsError);
 		}
-
-		// Fetch transactions
-		getTransactions(user.token);
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isTransactionsError, transactionsError]);
 
 	// TODO Render all transactions (reset all)
@@ -39,11 +54,12 @@ const TransactionList = () => {
 	// Handle transaction list sorting (desc/asc)
 	const toggleSortTransactionsDate = () => {
 		toggleTransactionSortDirection();
-		getTransactions(user.token);
 	};
 
-	//TODO Handle transaction list filtering (by week, by month, by year, all or by category)
-	const filterTransactions = () => {};
+	// Open filters modal => Handle transaction list filtering (by week, by month, by year or by category)
+	const filterTransactions = () => {
+		openModal();
+	};
 
 	if (isTransactionsLoading) {
 		return <Spinner />;
@@ -58,7 +74,7 @@ const TransactionList = () => {
 						className="flex flex-nowrap items-center text-slate-300 text-xs hover:text-yellow cursor-pointer mr-3"
 						onClick={filterTransactions}
 					>
-						<FaFilter className="mr-0.5 text-[8px]" /> Filter
+						<FaFilter className="mr-0.5 text-[8px]" /> Filters
 					</div>
 					<div
 						className="flex flex-nowrap items-center text-slate-300 text-xs hover:text-yellow cursor-pointer mr-3"
@@ -85,6 +101,8 @@ const TransactionList = () => {
 					</AnimatePresence>
 				</ul>
 			)}
+
+			<FiltersModal modalIsOpen={modalIsOpen} closeModal={closeModal} />
 		</>
 	);
 };

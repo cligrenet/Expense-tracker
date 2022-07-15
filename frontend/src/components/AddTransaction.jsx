@@ -157,19 +157,6 @@ const AddTransaction = () => {
 							<option value="Taxes">Taxes</option>
 							<option value="Transport">Transport</option>
 							<option value="Travel">Travel</option>
-							<option value=""></option>
-							<option value=""></option>
-							<option value=""></option>
-							<option value=""></option>
-							<option value=""></option>
-							<option value=""></option>
-							<option value=""></option>
-							<option value=""></option>
-							<option value=""></option>
-							<option value=""></option>
-							<option value=""></option>
-							<option value=""></option>
-							<option value=""></option>
 						</select>
 					</div>
 					<div className="form-control">
