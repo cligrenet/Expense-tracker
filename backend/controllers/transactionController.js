@@ -20,7 +20,9 @@ exports.getTransactions = async (req, res, next) => {
 		}
 
 		const transactions = await pool.query(
-			`SELECT * FROM transactions WHERE user_id='${wantedUserId}' ORDER BY created_at DESC`,
+			`SELECT * FROM transactions WHERE user_id='${wantedUserId}' ORDER BY created_at ${
+				req.query.sort_direction === 'desc' ? 'DESC' : 'ASC'
+			}`,
 		);
 
 		return res.status(200).json({

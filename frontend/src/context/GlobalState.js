@@ -18,6 +18,7 @@ const initialState = {
 	isTransactionsError: false,
 	isTransactionsSuccess: false,
 	isTransactionsLoading: true,
+	transactionsSortingDirection: 'desc',
 };
 
 // Create context
@@ -99,7 +100,10 @@ export const GlobalProvider = ({ children }) => {
 				},
 			};
 
-			const res = await axios.get('/api/v1/transactions', config);
+			const res = await axios.get(
+				`/api/v1/transactions?sort_direction=${state.transactionsSortingDirection}`,
+				config,
+			);
 			// console.log('GlobalState fetch transactions', res.data.data);
 
 			dispatch({
@@ -113,6 +117,14 @@ export const GlobalProvider = ({ children }) => {
 				payload: err.response.data.message,
 			});
 		}
+	}
+
+	// Sort transactions
+	async function toggleTransactionSortDirection() {
+		dispatch({
+			type: 'TRANSACTIONS_SORT',
+			payload: state.transactionsSortingDirection === 'asc' ? 'desc' : 'asc',
+		});
 	}
 
 	// Delete transaction
@@ -180,6 +192,7 @@ export const GlobalProvider = ({ children }) => {
 				getTransactions,
 				deleteTransaction,
 				addTransaction,
+				toggleTransactionSortDirection,
 			}}
 		>
 			{children}
