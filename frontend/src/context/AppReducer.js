@@ -85,6 +85,11 @@ export default (state, action) => {
 				...state,
 				transactionsSortingDirection: action.payload,
 			};
+		case 'TRANSACTIONS_FILTER_BY_CATEGORY':
+			return {
+				...state,
+				transactionsSelectedCategories: action.payload,
+			};
 		default:
 			return state;
 	}

@@ -19,6 +19,7 @@ const initialState = {
 	isTransactionsSuccess: false,
 	isTransactionsLoading: true,
 	transactionsSortingDirection: 'desc',
+	transactionsSelectedCategories: [],
 };
 
 // Create context
@@ -92,6 +93,7 @@ export const GlobalProvider = ({ children }) => {
 	}
 
 	// Fetch transactions
+	// Add queries into URL to do sorting and filtering
 	async function getTransactions(token) {
 		try {
 			const config = {
@@ -100,8 +102,20 @@ export const GlobalProvider = ({ children }) => {
 				},
 			};
 
+			let filters = '';
+
+			if (state.transactionsSelectedCategories) {
+				filters =
+					'&' +
+					state.transactionsSelectedCategories
+						.map((category) => {
+							return `filters[]=${encodeURI(category)}`;
+						})
+						.join('&');
+			}
+
 			const res = await axios.get(
-				`/api/v1/transactions?sort_direction=${state.transactionsSortingDirection}`,
+				`/api/v1/transactions?sort_direction=${state.transactionsSortingDirection}${filters}`,
 				config,
 			);
 			// console.log('GlobalState fetch transactions', res.data.data);
@@ -117,14 +131,6 @@ export const GlobalProvider = ({ children }) => {
 				payload: err.response.data.message,
 			});
 		}
-	}
-
-	// Sort transactions
-	async function toggleTransactionSortDirection() {
-		dispatch({
-			type: 'TRANSACTIONS_SORT',
-			payload: state.transactionsSortingDirection === 'asc' ? 'desc' : 'asc',
-		});
 	}
 
 	// Delete transaction
@@ -173,6 +179,22 @@ export const GlobalProvider = ({ children }) => {
 		}
 	}
 
+	// Sort transactions
+	async function toggleTransactionSortDirection() {
+		dispatch({
+			type: 'TRANSACTIONS_SORT',
+			payload: state.transactionsSortingDirection === 'asc' ? 'desc' : 'asc',
+		});
+	}
+
+	// Filter transactions by category
+	function handleTransactionsSelectedCategories(newCategories) {
+		dispatch({
+			type: 'TRANSACTIONS_FILTER_BY_CATEGORY',
+			payload: newCategories,
+		});
+	}
+
 	return (
 		<GlobalContext.Provider
 			value={{
@@ -186,6 +208,8 @@ export const GlobalProvider = ({ children }) => {
 				isTransactionsError: state.isTransactionsError,
 				isTransactionsLoading: state.isTransactionsLoading,
 				isTransactionsSuccess: state.isTransactionsSuccess,
+				transactionsSortingDirection: state.transactionsSortingDirection,
+				transactionsSelectedCategories: state.transactionsSelectedCategories,
 				register,
 				login,
 				logout,
@@ -193,6 +217,7 @@ export const GlobalProvider = ({ children }) => {
 				deleteTransaction,
 				addTransaction,
 				toggleTransactionSortDirection,
+				handleTransactionsSelectedCategories,
 			}}
 		>
 			{children}
