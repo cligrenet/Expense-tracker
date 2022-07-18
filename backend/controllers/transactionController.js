@@ -1,7 +1,4 @@
 const pool = require('../config/db');
-const asyncHandler = require('express-async-handler');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 
 // @desc Get all transactions
 // @route GET /api/v1/transactions
@@ -135,6 +132,88 @@ exports.deleteTransaction = async (req, res, next) => {
 		});
 	} catch (err) {
 		// console.log(err);
+		return res.status(500).json({
+			success: false,
+			error: 'Server error',
+		});
+	}
+};
+
+// @desc Get all income transactions
+// @route Get /api/v1/transactions/income
+// @access Private
+exports.getIncomes = async (req, res, next) => {
+	try {
+		const wantedUserId = req.user.rows[0].user_id;
+
+		const user = await pool.query(`SELECT * FROM users WHERE user_id='${wantedUserId}'`);
+
+		if (!user) {
+			res.status(401);
+			throw new Error('User not found');
+		}
+
+		// SELECT * FROM transactions WHERE user_id=3 AND category IN ('Cars', 'Business') ORDER BY created_at ASC
+		let filters = '';
+		if (req.query.filters && req.query.filters.length > 0) {
+			filters = `AND category IN (${req.query.filters.map((c) => `'${c}'`).join(',')})`;
+		}
+
+		const transactions = await pool.query(
+			`SELECT * FROM transactions WHERE user_id='${wantedUserId}' AND amount > 0 ${filters} ORDER BY created_at ${
+				req.query.sort_direction === 'desc' ? 'DESC' : 'ASC'
+			}`,
+		);
+
+		return res.status(200).json({
+			success: true,
+			count: transactions.rows.length,
+			data: transactions.rows,
+		});
+	} catch (err) {
+		console.log(err);
+
+		return res.status(500).json({
+			success: false,
+			error: 'Server error',
+		});
+	}
+};
+
+// @desc Get all expense transactions
+// @route Get /api/v1/transactions/expense
+// @access Private
+exports.getExpenses = async (req, res, next) => {
+	try {
+		const wantedUserId = req.user.rows[0].user_id;
+
+		const user = await pool.query(`SELECT * FROM users WHERE user_id='${wantedUserId}'`);
+
+		if (!user) {
+			res.status(401);
+			throw new Error('User not found');
+		}
+
+		// SELECT * FROM transactions WHERE user_id=3 AND category IN ('Cars', 'Business') ORDER BY created_at ASC
+		let filters = '';
+		if (req.query.filters && req.query.filters.length > 0) {
+			filters = `AND category IN (${req.query.filters.map((c) => `'${c}'`).join(',')})`;
+		}
+
+		const transactions = await pool.query(
+			`SELECT * FROM transactions WHERE user_id='${wantedUserId}' AND amount < 0 ${filters} ORDER BY created_at ${
+				req.query.sort_direction === 'desc' ? 'DESC' : 'ASC'
+			}`,
+		);
+
+		return res.status(200).json({
+			success: true,
+			count: transactions.rows.length,
+			data: transactions.rows,
+		});
+	} catch (err) {
+		console.log(err);
+
 		return res.status(500).json({
 			success: false,
 			error: 'Server error',
