@@ -10,24 +10,7 @@ import TransactionList from '../components/TransactionList';
 import AddTransaction from '../components/AddTransaction';
 
 function Home() {
-	const {
-		user,
-		isAuthError,
-		isAuthSuccess,
-		isAuthLoading,
-		authMessage,
-		transactions,
-		transactionsError,
-		isTransactionsError,
-		isTransactionsLoading,
-		isTransactionsSuccess,
-		register,
-		login,
-		logout,
-		getTransactions,
-		deleteTransaction,
-		addTransaction,
-	} = useContext(GlobalContext);
+	const { logout } = useContext(GlobalContext);
 
 	const navigate = useNavigate();
 
