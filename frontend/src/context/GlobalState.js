@@ -195,6 +195,86 @@ export const GlobalProvider = ({ children }) => {
 		});
 	}
 
+	// Get all incomes
+	async function getIncomes(token) {
+		try {
+			const config = {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			};
+
+			let filters = '';
+
+			if (state.transactionsSelectedCategories) {
+				filters =
+					'&' +
+					state.transactionsSelectedCategories
+						.map((category) => {
+							return `filters[]=${encodeURI(category)}`;
+						})
+						.join('&');
+			}
+
+			const res = await axios.get(
+				`/api/v1/transactions/income/?sort_direction=${state.transactionsSortingDirection}${filters}`,
+				config,
+			);
+			// console.log('GlobalState fetch transactions', res.data.data);
+
+			dispatch({
+				type: 'GET_INCOMES',
+				payload: res.data.data,
+			});
+		} catch (err) {
+			console.log(err);
+			dispatch({
+				type: 'TRANSACTION_ERROR',
+				payload: err.response.data.message,
+			});
+		}
+	}
+
+	// Get all expenses
+	async function getExpenses(token) {
+		try {
+			const config = {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			};
+
+			let filters = '';
+
+			if (state.transactionsSelectedCategories) {
+				filters =
+					'&' +
+					state.transactionsSelectedCategories
+						.map((category) => {
+							return `filters[]=${encodeURI(category)}`;
+						})
+						.join('&');
+			}
+
+			const res = await axios.get(
+				`/api/v1/transactions/expense/?sort_direction=${state.transactionsSortingDirection}${filters}`,
+				config,
+			);
+			// console.log('GlobalState fetch transactions', res.data.data);
+
+			dispatch({
+				type: 'GET_EXPENSES',
+				payload: res.data.data,
+			});
+		} catch (err) {
+			console.log(err);
+			dispatch({
+				type: 'TRANSACTION_ERROR',
+				payload: err.response.data.message,
+			});
+		}
+	}
+
 	return (
 		<GlobalContext.Provider
 			value={{
@@ -218,6 +298,8 @@ export const GlobalProvider = ({ children }) => {
 				addTransaction,
 				toggleTransactionSortDirection,
 				handleTransactionsSelectedCategories,
+				getIncomes,
+				getExpenses,
 			}}
 		>
 			{children}

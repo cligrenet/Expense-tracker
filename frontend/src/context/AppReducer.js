@@ -52,13 +52,6 @@ export default (state, action) => {
 				isTransactionsSuccess: true,
 				transactions: action.payload,
 			};
-		case 'GET_REVERTED_TRANSACTIONS':
-			return {
-				...state,
-				isTransactionsLoading: false,
-				isTransactionsSuccess: true,
-				transactionsReverted: action.payload,
-			};
 		case 'DELETE_TRANSACTION':
 			return {
 				...state,
@@ -89,6 +82,20 @@ export default (state, action) => {
 			return {
 				...state,
 				transactionsSelectedCategories: action.payload,
+			};
+		case 'GET_INCOMES':
+			return {
+				...state,
+				isTransactionsLoading: false,
+				isTransactionsSuccess: true,
+				transactions: action.payload,
+			};
+		case 'GET_EXPENSES':
+			return {
+				...state,
+				isTransactionsLoading: false,
+				isTransactionsSuccess: true,
+				transactions: action.payload,
 			};
 		default:
 			return state;
