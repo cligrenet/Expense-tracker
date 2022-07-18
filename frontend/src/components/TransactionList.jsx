@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { GlobalContext } from '../context/GlobalState';
 import Transaction from './Transaction';
+import { useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Spinner from '../components/Spinner';
 import { toast } from 'react-toastify';
@@ -21,9 +22,12 @@ const TransactionList = () => {
 		toggleTransactionSortDirection,
 		transactionsSelectedCategories,
 		handleTransactionsSelectedCategories,
+		getIncomes,
+		getExpenses,
 	} = useContext(GlobalContext);
 
-	// console.log('from TransactionList ', transactionsSortingDirection);
+	const location = useLocation();
+	// console.log(location.pathname);
 
 	// Modal state
 	const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -38,7 +42,20 @@ const TransactionList = () => {
 	};
 
 	useEffect(() => {
-		getTransactions(user.token);
+		switch (location.pathname) {
+			case '/':
+				getTransactions(user.token);
+				break;
+			case '/income':
+				getIncomes(user.token);
+				break;
+			case '/expense':
+				getExpenses(user.token);
+				break;
+			default:
+				getTransactions(user.token);
+		}
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [transactionsSelectedCategories, transactionsSortingDirection]); // Whenever selected categories change or sorting direction change, update transaction list
 
