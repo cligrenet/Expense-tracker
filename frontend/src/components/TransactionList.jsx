@@ -6,6 +6,7 @@ import Spinner from '../components/Spinner';
 import { toast } from 'react-toastify';
 import { FaSort, FaFilter, FaListUl } from 'react-icons/fa';
 import FiltersModal from './FiltersModal';
+import { categories } from '../utils/categoriesData';
 
 const TransactionList = () => {
 	// States from context
@@ -19,6 +20,7 @@ const TransactionList = () => {
 		transactionsSortingDirection,
 		toggleTransactionSortDirection,
 		transactionsSelectedCategories,
+		handleTransactionsSelectedCategories,
 	} = useContext(GlobalContext);
 
 	// console.log('from TransactionList ', transactions, transactionsReverted, user);
@@ -46,9 +48,9 @@ const TransactionList = () => {
 		}
 	}, [isTransactionsError, transactionsError]);
 
-	// TODO Render all transactions (reset all)
+	// Render all transactions (reset all filters)
 	const showAllTransactions = () => {
-		// setTransactionList(transactions);
+		handleTransactionsSelectedCategories(categories);
 	};
 
 	// Handle transaction list sorting (desc/asc)
