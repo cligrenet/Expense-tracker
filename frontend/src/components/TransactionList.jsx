@@ -4,7 +4,7 @@ import Transaction from './Transaction';
 import { AnimatePresence } from 'framer-motion';
 import Spinner from '../components/Spinner';
 import { toast } from 'react-toastify';
-import { FaSort, FaFilter, FaListUl } from 'react-icons/fa';
+import { FaFilter, FaListUl, FaSortAmountDown, FaSortAmountUpAlt } from 'react-icons/fa';
 import FiltersModal from './FiltersModal';
 import { categories } from '../utils/categoriesData';
 
@@ -23,7 +23,7 @@ const TransactionList = () => {
 		handleTransactionsSelectedCategories,
 	} = useContext(GlobalContext);
 
-	// console.log('from TransactionList ', transactions, transactionsReverted, user);
+	// console.log('from TransactionList ', transactionsSortingDirection);
 
 	// Modal state
 	const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -74,15 +74,20 @@ const TransactionList = () => {
 				<div className="flex flex-wrap">
 					<div
 						className="flex flex-nowrap items-center text-slate-300 text-xs hover:text-yellow cursor-pointer mr-3"
-						onClick={filterTransactions}
+						onClick={toggleSortTransactionsDate}
 					>
-						<FaFilter className="mr-0.5 text-[8px]" /> Filters
+						{transactionsSortingDirection === 'desc' ? (
+							<FaSortAmountDown className="mr-0.5" />
+						) : (
+							<FaSortAmountUpAlt className="mr-0.5" />
+						)}{' '}
+						Sort
 					</div>
 					<div
 						className="flex flex-nowrap items-center text-slate-300 text-xs hover:text-yellow cursor-pointer mr-3"
-						onClick={toggleSortTransactionsDate}
+						onClick={filterTransactions}
 					>
-						<FaSort /> Sort
+						<FaFilter className="mr-0.5 text-[8px]" /> Filters
 					</div>
 					<div
 						className="flex flex-nowrap items-center text-slate-300 text-xs hover:text-yellow cursor-pointer "
