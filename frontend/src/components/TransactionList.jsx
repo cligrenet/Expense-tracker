@@ -83,12 +83,14 @@ const TransactionList = () => {
 						)}{' '}
 						Sort
 					</div>
+
 					<div
 						className="flex flex-nowrap items-center text-slate-300 text-xs hover:text-yellow cursor-pointer mr-3"
 						onClick={filterTransactions}
 					>
 						<FaFilter className="mr-0.5 text-[8px]" /> Filters
 					</div>
+
 					<div
 						className="flex flex-nowrap items-center text-slate-300 text-xs hover:text-yellow cursor-pointer "
 						onClick={showAllTransactions}
