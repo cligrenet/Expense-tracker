@@ -1,8 +1,8 @@
-import Header from './components/Header';
-// import { GlobalProvider } from './context/GlobalState';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Income from './pages/Income';
+import Expense from './pages/Expense';
 import PrivateRoute from './components/PrivateRoute';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -19,6 +19,13 @@ function App() {
 						<Route path="/" element={<PrivateRoute />}>
 							<Route path="/" element={<Home />} />
 						</Route>
+						<Route path="/income" element={<PrivateRoute />}>
+							<Route path="/income" element={<Income />} />
+						</Route>
+						<Route path="/expense" element={<PrivateRoute />}>
+							<Route path="/expense" element={<Expense />} />
+						</Route>
+
 						<Route path="/login" element={<Login />} />
 						<Route path="/register" element={<Register />} />
 					</Routes>
