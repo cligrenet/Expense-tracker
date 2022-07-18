@@ -2,7 +2,6 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Income from './pages/Income';
-import Expense from './pages/Expense';
 import PrivateRoute from './components/PrivateRoute';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -23,7 +22,7 @@ function App() {
 							<Route path="/income" element={<Income />} />
 						</Route>
 						<Route path="/expense" element={<PrivateRoute />}>
-							<Route path="/expense" element={<Expense />} />
+							<Route path="/expense" element={<Income />} />
 						</Route>
 
 						<Route path="/login" element={<Login />} />

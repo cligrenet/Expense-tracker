@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { GlobalContext } from '../context/GlobalState';
+import { calcIncomeTotal, calcExpenseTotal } from '../utils/calculate';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 
@@ -8,20 +9,8 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const ChartComp = () => {
 	const { transactions } = useContext(GlobalContext);
 
-	const income = transactions
-		? transactions
-				.map((transaction) => +transaction.amount)
-				.filter((amount) => amount > 0)
-				.reduce((acc, amount) => (acc += amount), 0)
-		: 0;
-	const expense = transactions
-		? Math.abs(
-				transactions
-					.map((transaction) => +transaction.amount)
-					.filter((amount) => amount < 0)
-					.reduce((acc, amount) => (acc += amount), 0),
-		  )
-		: 0;
+	const income = transactions ? calcIncomeTotal(transactions) : 0;
+	const expense = transactions ? calcExpenseTotal(transactions) : 0;
 
 	const chartData = {
 		labels: ['Income', 'Expense'],
