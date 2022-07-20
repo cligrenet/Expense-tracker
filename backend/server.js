@@ -1,9 +1,8 @@
 const express = require('express');
 const path = require('path');
-const dotenv = require('dotenv').config();
-const colors = require('colors'); // Colored console log
+require('dotenv').config();
+require('colors'); // Colored console log
 const morgan = require('morgan');
-const pool = require('./config/db');
 const cors = require('cors');
 const { errorHandler } = require('./middleware/errorMiddleware');
 
@@ -43,5 +42,5 @@ const PORT = process.env.SERVER_PORT || 8080;
 
 app.listen(
 	PORT,
-	console.log(`Server running in ${process.env.NODE_ENV} mode on port htllp:localhost:${PORT}`.yellow.bold),
+	console.log(`🚀 Server running in ${process.env.NODE_ENV} mode on port htllp:localhost:${PORT}`.yellow.bold),
 );
