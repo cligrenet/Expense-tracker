@@ -5,9 +5,10 @@ import { numberWithCommas } from '../utils/format';
 const Balance = () => {
 	const { transactions } = useContext(GlobalContext);
 
-	const balance = transactions
-		? transactions.reduce((balance, transaction) => (balance += +transaction.amount), 0).toFixed(2)
-		: 0;
+	const balance =
+		transactions && transactions.length !== 0
+			? transactions.reduce((balance, transaction) => (balance += +transaction.amount), 0).toFixed(2)
+			: 0;
 
 	return (
 		<>
