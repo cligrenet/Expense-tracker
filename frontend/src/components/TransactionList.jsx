@@ -67,7 +67,7 @@ const TransactionList = () => {
 
 	// Render all transactions (reset all filters)
 	const showAllTransactions = () => {
-		handleTransactionsSelectedCategories(categories);
+		handleTransactionsSelectedCategories(null);
 	};
 
 	// Handle transaction list sorting (desc/asc)

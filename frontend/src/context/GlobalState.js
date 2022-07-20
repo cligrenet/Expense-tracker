@@ -168,7 +168,7 @@ export const GlobalProvider = ({ children }) => {
 
 			dispatch({
 				type: 'ADD_TRANSACTION',
-				payload: res.data.data[0],
+				payload: res.data.data,
 			});
 		} catch (err) {
 			console.log(err);
