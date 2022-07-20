@@ -55,7 +55,10 @@ function FiltersModal({ modalIsOpen, closeModal }) {
 						className="basic-multi-select"
 						classNamePrefix="select"
 						onChange={handleCategorySelect}
-						value={options.filter((obj) => transactionsSelectedCategories.includes(obj.value))}
+						value={options.filter(
+							(obj) =>
+								transactionsSelectedCategories && transactionsSelectedCategories.includes(obj.value),
+						)}
 					/>
 				</div>
 			</Modal>

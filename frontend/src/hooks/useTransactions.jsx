@@ -32,17 +32,22 @@ function useTransactions(type) {
 				borderWidth: 4,
 			},
 		],
-		options: {
+	};
+
+	const options = {
+		plugins: {
 			legend: {
-				labels: {
-					Color: '#262e69', //QUESTION
-				},
+				display: false,
+				// labels: {
+				// 	color: 'rgb(203 213 225)',
+				// },
 			},
 		},
 	};
 	return {
 		filteredCategories,
 		chartData,
+		options,
 	};
 }
 
