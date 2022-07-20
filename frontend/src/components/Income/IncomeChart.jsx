@@ -9,11 +9,11 @@ function IncomeChart() {
 	const location = useLocation();
 	const type = location.pathname.substring(1);
 
-	const { chartData } = useTransactions(type);
+	const { chartData, options } = useTransactions(type);
 
 	return (
 		<section className="px-20 mb-5">
-			<Doughnut data={chartData} />
+			<Doughnut data={chartData} options={options} />
 		</section>
 	);
 }
