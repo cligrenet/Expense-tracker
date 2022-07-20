@@ -13,6 +13,7 @@
 	"author": "Chenjia LI",
 	"license": "MIT",
 	"dependencies": {
+		"@prisma/client": "^4.1.0",
 		"bcryptjs": "^2.4.3",
 		"colors": "^1.4.0",
 		"cors": "^2.8.5",
@@ -25,6 +26,7 @@
 	},
 	"devDependencies": {
 		"concurrently": "^7.2.2",
-		"nodemon": "^2.0.19"
+		"nodemon": "^2.0.19",
+		"prisma": "^4.1.0"
 	}
 }
