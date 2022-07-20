@@ -1,8 +1,10 @@
+const { PrismaClient } = require('@prisma/client');
 const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcryptjs');
-const pool = require('../config/db');
+// const pool = require('../config/db');
 const jwt = require('jsonwebtoken');
-const expressAsyncHandler = require('express-async-handler');
+
+const prisma = new PrismaClient();
 
 // @desc Register a new user
 // @route POST /api/v1/users
@@ -17,10 +19,16 @@ const registerUser = asyncHandler(async (req, res) => {
 	}
 
 	// Find if user already exists
-	const foundUser = await pool.query(`SELECT email FROM users WHERE email='${email}'`);
-	// console.log(foundUser);
+	// const foundUser = await pool.query(`SELECT email FROM users WHERE email='${email}'`);
+	const foundUser = await prisma.users.findFirst({
+		where: {
+			email,
+		},
+	});
 
-	if (foundUser.rows.length !== 0) {
+	// console.log({ foundUser });
+
+	if (foundUser && foundUser.length !== 0) {
 		res.status(400);
 		throw new Error('User already exists');
 	}
@@ -30,11 +38,20 @@ const registerUser = asyncHandler(async (req, res) => {
 	const hashedPassword = await bcrypt.hash(password, salt);
 
 	// Create user
-	const user = await pool.query(
-		'INSERT INTO users(name, email, password, is_admin) VALUES ($1, $2, $3, $4) RETURNING *',
-		[name, email, hashedPassword, false],
-	);
-	const newUser = user.rows[0];
+	// const user = await pool.query(
+	// 	'INSERT INTO users(name, email, password, is_admin) VALUES ($1, $2, $3, $4) RETURNING *',
+	// 	[name, email, hashedPassword, false],
+	// );
+	const newUser = await prisma.users.create({
+		data: {
+			name,
+			email,
+			password: hashedPassword,
+			is_admin: false,
+		},
+	});
+	// const newUser = user.rows[0];
+	// console.log({ newUser });
 
 	if (newUser) {
 		res.status(201).json({
@@ -55,8 +72,13 @@ const registerUser = asyncHandler(async (req, res) => {
 const loginUser = asyncHandler(async (req, res) => {
 	const { email, password } = req.body;
 
-	const user = await pool.query(`SELECT * FROM users WHERE email='${email}'`);
-	const foundUser = user.rows[0];
+	// const user = await pool.query(`SELECT * FROM users WHERE email='${email}'`);
+	const foundUser = await prisma.users.findFirst({
+		where: {
+			email,
+		},
+	});
+	// const foundUser = user.rows[0];
 	// console.log({ foundUser });
 
 	// Check user and passwords match
