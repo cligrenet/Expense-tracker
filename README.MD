@@ -21,7 +21,7 @@ Backend framework related:
 -   [express-async-handler](https://www.npmjs.com/package/express-async-handler)
 -   [colors](https://www.npmjs.com/package/colors)
 -   [dotenv](https://www.npmjs.com/package/dotenv)
--   [morgan](https://www.npmjs.com/package/morgan),
+-   [morgan](https://www.npmjs.com/package/morgan)
 
 DB related:
 
@@ -40,7 +40,7 @@ Frontend related:
 -   [react-icons](https://react-icons.github.io/react-icons/)
 -   [tailwindcss](https://tailwindcss.com/)
 -   [framer-motion](https://www.npmjs.com/package/framer-motion): Animation library for React
-    chart.js,
+-   [Chart.js v3](https://www.chartjs.org/docs/latest/)
 -   [react-chartjs-2](https://www.npmjs.com/package/react-chartjs-2#docs): Charts for React
 -   [react-toastify](https://www.npmjs.com/package/react-toastify): Snackbar notifications for React
 -   [react-modal](https://www.npmjs.com/package/react-modal): Accessible modal dialog component for React
@@ -59,7 +59,7 @@ $ npm install
 $ npm run dev
 
 # check prisma studio (db)
-npx prisma studio
+$ npx prisma studio
 
 ```
 
