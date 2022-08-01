@@ -2,6 +2,9 @@ import { createContext, useReducer } from 'react';
 import AppReducer from './AppReducer';
 import axios from 'axios';
 
+// Global axios setup (create an instance to allow setup of middlewares)
+// axios.defaults.baseURL = 'http://localhost:8080';
+
 // Get user from localStorage
 const user = JSON.parse(localStorage.getItem('user'));
 
