@@ -9,8 +9,7 @@ const prisma = new PrismaClient();
 exports.getTransactions = async (req, res, next) => {
 	// Get user using the id in the JWT
 	try {
-		// console.log(req.user.rows[0]);
-		const wantedUserId = req.user.rows[0].user_id;
+		const wantedUserId = req.user.user_id;
 		// console.log({ wantedUserId });
 
 		// const user = await pool.query(`SELECT * FROM users WHERE user_id='${wantedUserId}'`);
@@ -81,7 +80,7 @@ exports.addTransaction = async (req, res, next) => {
 		}
 
 		// Get user using the id in the JWT
-		const wantedUserId = req.user.rows[0].user_id;
+		const wantedUserId = req.user.user_id;
 		// const user = await pool.query(`SELECT * FROM users WHERE user_id='${wantedUserId}'`);
 		const user = await prisma.users.findUnique({
 			where: {
@@ -133,7 +132,7 @@ exports.deleteTransaction = async (req, res, next) => {
 	try {
 		// Get user using the id in the JWT
 		// console.log(req.user.rows[0]);
-		const wantedUserId = req.user.rows[0].user_id;
+		const wantedUserId = req.user.user_id;
 		// const user = await pool.query(`SELECT * FROM users WHERE user_id='${wantedUserId}'`);
 		const user = await prisma.users.findUnique({
 			where: {
@@ -196,7 +195,7 @@ exports.deleteTransaction = async (req, res, next) => {
 // @access Private
 exports.getIncomes = async (req, res, next) => {
 	try {
-		const wantedUserId = req.user.rows[0].user_id;
+		const wantedUserId = req.user.user_id;
 
 		// const user = await pool.query(`SELECT * FROM users WHERE user_id='${wantedUserId}'`);
 		const user = await prisma.users.findUnique({
@@ -258,7 +257,7 @@ exports.getIncomes = async (req, res, next) => {
 // @access Private
 exports.getExpenses = async (req, res, next) => {
 	try {
-		const wantedUserId = req.user.rows[0].user_id;
+		const wantedUserId = req.user.user_id;
 
 		// const user = await pool.query(`SELECT * FROM users WHERE user_id='${wantedUserId}'`);
 		const user = await prisma.users.findUnique({
