@@ -42,5 +42,5 @@ const PORT = process.env.SERVER_PORT || 8080;
 
 app.listen(
 	PORT,
-	console.log(`🚀 Server running in ${process.env.NODE_ENV} mode on port htllp:localhost:${PORT}`.yellow.bold),
+	console.log(`🚀 Server running in ${process.env.NODE_ENV} mode on port http://localhost:${PORT}`.yellow.bold),
 );
