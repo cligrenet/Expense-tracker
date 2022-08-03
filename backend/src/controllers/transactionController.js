@@ -1,7 +1,7 @@
-const { PrismaClient } = require('@prisma/client');
 // const pool = require('../config/db');
-
+const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
+
 
 // @desc Get all transactions
 // @route GET /api/v1/transactions

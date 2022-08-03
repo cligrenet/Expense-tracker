@@ -1,9 +1,8 @@
-const { PrismaClient } = require('@prisma/client');
+// const pool = require('../config/db');
 const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcryptjs');
-// const pool = require('../config/db');
 const jwt = require('jsonwebtoken');
-
+const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 // @desc Register a new user
@@ -25,8 +24,6 @@ const registerUser = asyncHandler(async (req, res) => {
 			email,
 		},
 	});
-
-	// console.log({ foundUser });
 
 	if (foundUser && foundUser.length !== 0) {
 		res.status(400);
@@ -51,7 +48,7 @@ const registerUser = asyncHandler(async (req, res) => {
 		},
 	});
 	// const newUser = user.rows[0];
-	// console.log({ newUser });
+	console.log({ newUser });
 
 	if (newUser) {
 		res.status(201).json({
@@ -78,6 +75,7 @@ const loginUser = asyncHandler(async (req, res) => {
 			email,
 		},
 	});
+
 	// const foundUser = user.rows[0];
 	// console.log({ foundUser });
 
@@ -99,14 +97,15 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route /api/v1/users/me
 // @access Private
 const getMe = asyncHandler(async (req, res) => {
-	const user = req.user.rows[0];
+	const user = req.user;
 	res.status(200).json(user);
 });
 
+//TODO
 // Helper function: Generate Token
 const generateToken = (id) => {
 	return jwt.sign({ id }, process.env.JWT_SECRET, {
-		expiresIn: '30d',
+		expiresIn: '30min',
 	});
 };
 
