@@ -1,0 +1,21 @@
+version: '3.9'
+services:
+    pernexpense:
+        image: postgres:14
+        container_name: pernexpense
+        ports:
+            - 5434:5432
+        environment:
+            POSTGRES_USER: '${DB_USERNAME}'
+            POSTGRES_PASSWORD: '${DB_PASSWORD}'
+            POSTGRES_DB: '${DATABASE}'
+
+    pernexpense-test:
+        image: postgres:14
+        container_name: pernexpense-test
+        ports:
+            - 5435:5432
+        environment:
+            POSTGRES_USER: '${DB_USERNAME}'
+            POSTGRES_PASSWORD: '${DB_PASSWORD}'
+            POSTGRES_DB: '${TEST_DB}'
