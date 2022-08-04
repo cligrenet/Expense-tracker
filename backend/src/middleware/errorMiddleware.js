@@ -1,4 +1,6 @@
+// Not using this middleware since not usring express-async-handler
 const errorHandler = (err, req, res, next) => {
+	// BUG ??
 	const statusCode = 500; //res.statusCode ? res.statusCode : 500;
 	res.status(statusCode);
 	res.json({

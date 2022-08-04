@@ -2,7 +2,6 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-
 // @desc Get all transactions
 // @route GET /api/v1/transactions
 // @access Private
@@ -58,11 +57,12 @@ exports.getTransactions = async (req, res, next) => {
 			data: transactions,
 		});
 	} catch (err) {
-		console.log(err);
+		// console.log(err);
 
 		return res.status(500).json({
 			success: false,
 			error: 'Server error',
+			message: err.message,
 		});
 	}
 };
@@ -109,7 +109,7 @@ exports.addTransaction = async (req, res, next) => {
 
 		return res.status(201).json({ success: true, data: transaction });
 	} catch (err) {
-		console.error(err);
+		// console.error(err);
 
 		if (err.message === 'ValidationError') {
 			return res.status(400).json({
@@ -182,10 +182,11 @@ exports.deleteTransaction = async (req, res, next) => {
 			message: 'Transaction deleted',
 		});
 	} catch (err) {
-		console.log(err);
+		// console.log(err);
 		return res.status(500).json({
 			success: false,
 			error: 'Server error',
+			message: err.message,
 		});
 	}
 };
