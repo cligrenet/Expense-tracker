@@ -2,7 +2,7 @@
 
 ## About
 
-This is a full stack project using Express, PostgreSQL (Prisma as ORM) and React.
+This is a full stack project using Express, PostgreSQL and React.
 
 ## Prerequisites
 
@@ -18,7 +18,6 @@ Authentication:
 Backend framework related:
 
 -   [express](https://expressjs.com/)
--   [express-async-handler](https://www.npmjs.com/package/express-async-handler)
 -   [colors](https://www.npmjs.com/package/colors)
 -   [dotenv](https://www.npmjs.com/package/dotenv)
 -   [morgan](https://www.npmjs.com/package/morgan)
@@ -27,6 +26,12 @@ DB related:
 
 -   [pg](https://www.npmjs.com/package/pg): First try, then move to Prisma
 -   [Prisma](https://www.prisma.io/)
+-   Docker compose
+
+Testing:
+
+-   Jest
+-   [SuperTest](https://github.com/visionmedia/supertest#readme): It extends another library SuperAgent, to provide a high-level abstraction for testing HTTP
 
 Misc:
 
@@ -58,8 +63,13 @@ $ npm install
 # development (run this command on the project root)
 $ npm run dev
 
-# check prisma studio (db)
+# check prisma studio (run on backend dir, on port 5555)
 $ npx prisma studio
+
+# API e2e test
+$ npm run test
+$ npm run test:watch
+$ npm run test:e2e
 
 ```
 
@@ -67,3 +77,7 @@ $ npx prisma studio
 
 -   Backend: `127.0.0.1:8080`
 -   Frontend: `127.0.0.1:3000`
+
+-   Docker dompose holds two dbs:
+    ⋅⋅* Dev DB runs on 5434
+    ⋅⋅* Test DB runs on 5435
