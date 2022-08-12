@@ -60,11 +60,17 @@ $ npm install
 ## Running the server
 
 ```bash
-# development (run this command on the project root)
+# development (run this command on the project root, concurrently)
 $ npm run dev
 
+# backend
+npm run server
+
+# frontend
+$ npm start
+
 # check prisma studio (run on backend dir, on port 5555)
-$ npx prisma studio
+$ npx dotenv -e .env -- prisma studio
 
 # API e2e test
 $ npm run test
