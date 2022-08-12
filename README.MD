@@ -87,3 +87,11 @@ $ npm run test:e2e
 -   Docker dompose holds two dbs:
     ⋅⋅* Dev DB runs on 5434
     ⋅⋅* Test DB runs on 5435
+
+## Screen shots
+
+![alt text](https://github.com/cligrenet/Expense-tracker/blob/main/frontend/public/main.png 'main')
+![alt text](https://github.com/cligrenet/Expense-tracker/blob/main/frontend/public/expenses.png 'expenses')
+![alt text](https://github.com/cligrenet/Expense-tracker/blob/main/frontend/public/modal.png 'add transaction modal')
+![alt text](https://github.com/cligrenet/Expense-tracker/blob/main/frontend/public/login.png 'log in')
+![alt text](https://github.com/cligrenet/Expense-tracker/blob/main/frontend/public/signup.png 'sign up')
