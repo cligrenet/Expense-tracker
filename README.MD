@@ -90,8 +90,5 @@ $ npm run test:e2e
 
 ## Screen shots
 
-![alt text](https://github.com/cligrenet/Expense-tracker/blob/main/frontend/public/main.png 'main')
-![alt text](https://github.com/cligrenet/Expense-tracker/blob/main/frontend/public/expenses.png 'expenses')
-![alt text](https://github.com/cligrenet/Expense-tracker/blob/main/frontend/public/modal.png 'add transaction modal')
-![alt text](https://github.com/cligrenet/Expense-tracker/blob/main/frontend/public/login.png 'log in')
-![alt text](https://github.com/cligrenet/Expense-tracker/blob/main/frontend/public/signup.png 'sign up')
+![alt text](https://github.com/cligrenet/Expense-tracker/blob/main/frontend/public/shot1.png 'shot 1')
+![alt text](https://github.com/cligrenet/Expense-tracker/blob/main/frontend/public/shot2.png 'shot 2')
